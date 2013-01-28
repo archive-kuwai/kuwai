@@ -45,11 +45,20 @@ end
 post '/api/*/*' do |ask_by_json, verify_length|
   p ask_by_json.length 
   p verify_length.to_i
-  if(ask_by_json.length != verify_length.to_i) then return "Verify failed" end
+  #if(ask_by_json.length != verify_length.to_i) then return "Verify failed" end
+
   ask = JSON.parse(ask_by_json)
-  p ask["who"]
-  p ask["who"]["email"]
+  if( ! auth(ask["who"]["email"],ask["who"]["key"])) then return "Wrong email or password" end
   
+  
+  p ask["method"]
+  p ask["params"][0]
+  p ask["params"][1]
+  case ask["method"]
+    when "list" then
+      return list_records(ask["params"][0],ask["params"][1]);
+    else
+  end
 end
 
 

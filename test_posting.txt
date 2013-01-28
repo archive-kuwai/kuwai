@@ -1,1 +1,1 @@
-/api/{"who":{"email":"naohta@gmail.com","key":"XYZ123456789","proc":"hjfioeawjfei" }, "cmd":"list", "params":["2013-01"]}/116
+/api/{"who":{"email":"naohta@gmail.com","key":"XYZ123456789","proc":"hjfioeawjfei" }, "method":"list", "params":["Good Company","2013-01"]}/134
