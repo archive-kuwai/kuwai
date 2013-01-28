@@ -1,0 +1,5 @@
+TableName[HashKey(Type), RangeKey(Type)]
+
+notices[title(String), submit_date(String)]
+templates[title(String)]
+
