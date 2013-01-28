@@ -6,6 +6,7 @@ def load_backyard
 end
 load_backyard
 
+get '/' do "Hello! :)" end
 get '/hello/:name' do "hello, #{params[:name]}:)" end
 get '/test/json' do 'pad(["some1","some2","some3"]);' end
 get '/test/json2' do 'pad([{"root":{"k1":"yas!","k2":"This is JSON one."}}])' end
@@ -25,17 +26,23 @@ get '/time' do time end
 get '/template/*' do |title| template title end
 
 
-
-
-
-get '/submit/*' do |title|
-  submit_notice(title)
+#------------------------------------------
+get '/create/*/*' do |tenant,title|
+  create_record(tenant,title)
 end
 
-get '/list/*' do |s|
-  list_notices s
+get '/list/*/*' do |tenant,range_begins_with|
+  list_records tenant,range_begins_with
 end
 
-get '/one/*/*' do |hash,range|
-  one hash,range
+get '/one/*/*' do |tenant,range_value|
+  one tenant,range_value
 end
+#------------------------------------------
+
+
+
+
+
+
+

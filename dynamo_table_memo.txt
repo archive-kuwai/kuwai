@@ -1,5 +1,7 @@
 TableName[HashKey(Type), RangeKey(Type)]
 
-notices[title(String), submit_date(String)]
-templates[title(String)]
+OLD  notices[title(String), submit_date(String)]
+OLD  templates[title(String)]
 
+kuwai_records[tenant(String), range_key(String)]
+kuwai_templates[tenant(String), range_key(String)]
