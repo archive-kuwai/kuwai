@@ -1,7 +1,7 @@
 #encoding:utf-8
 require 'aws/dynamo_db'
-load './dynamo_connect.rb'
-load './jsonp_from_dynamo_data.rb'
+require './dynamo_connect.rb'
+require './jsonp_from_dynamo_data.rb'
 
 def list_records(tenant,range_bengins_with)
 

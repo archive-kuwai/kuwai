@@ -1,7 +1,7 @@
 #encoding:utf-8
 require 'aws/dynamo_db'
-load './dynamo_connect.rb'
-load './range_key_for_records.rb'
+require './dynamo_connect.rb'
+require './range_key_for_records.rb'
 
 def create_record(tenant,title)
   attrs = Dynamo.db.tables["kuwai_templates"].load_schema.items[tenant,title].attributes

@@ -75,7 +75,7 @@
       };
       function callWebAPI(url){
         $.ajax({
-          type:"GET",
+          type:"POST",
           url:url,
           dataType:"jsonp",
           jsonpCallback:"pad",
@@ -108,6 +108,22 @@
       <input id="login_input_pw" type="password" placeholder="パスワード"></input>
     </div>
     <script>
+      function callWebAPI2(url){
+        $.ajax({
+          type:"GET",
+          url:url,
+          dataType:"jsonp",
+          jsonpCallback:"pad",
+          contentType:"application/json",
+          success:function(result){
+            console.log("callWebAPI2-Success");
+            NAVerticalTableForDynamo.build($('#tbl'), result);
+          },
+          error:function(){
+            console.log("callWebAPI2-Error");
+          }
+        });
+      };  
       $(function(){
         $('#login_dialog').dialog({
           autoOpen:false, title:'Login3', closeOnEscape:true, modal:true,
