@@ -47,6 +47,9 @@ post '/api/*/*' do |ask_by_json, verify_length|
   p verify_length.to_i
   if(ask_by_json.length != verify_length.to_i) then return "Verify failed" end
   ask = JSON.parse(ask_by_json)
+  p ask["who"]
+  p ask["who"]["email"]
+  
 end
 
 

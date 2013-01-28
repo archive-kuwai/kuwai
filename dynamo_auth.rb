@@ -13,4 +13,4 @@ end
 
 
 puts "Testing auth..."
-puts auth "naohta@gmail.com","XYZ#123456789"
+puts auth "naohta@gmail.com","XYZ123456789"
