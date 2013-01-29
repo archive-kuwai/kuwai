@@ -1,4 +1,4 @@
-#encoding:utf-8
+#coding:utf-8
 require 'sinatra'
 def load_backyard
   load './dynamo_read.rb'
@@ -64,21 +64,16 @@ post '/api/*/*' do |ask_by_json, verify_length|
   end
 end
 
-get '/login' do
-  content_tyep :html
-  erb :login
+get '/signin' do
+  content_type :json
+  erb :signin
+
 end
+
 
 __END__
 
-@@login
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Inline template</title>
-  </head>
-  <body>
-    <h1>Worked!</h1>
-  </body>
-</html>
+@@signin
+<h1>どう？Sign-in!</h1>
+
+
