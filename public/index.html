@@ -71,17 +71,17 @@
 
     <script>
       var func_on_click = function(hash,range){
-        s = {
+        obj = {
           "who":{
             "email":"naohta@gmail.com",
             "key":"XYZ123456789",
-            "proc":"abcdefg-hijk"},
+            "proc":"abcdefg-hijk"
+          },
           "method":"one",
           "params":[hash,range]
         };
-        console.log(s);
-        console.log(JSON.stringify(s));
-        //callWebAPI("/api/" + s);
+        s = JSON.stringify(obj);
+        callWebAPI3("/api/" + s + "/" + s.length);
       };
       function callWebAPI(url){
         $.ajax({
@@ -93,6 +93,22 @@
           success:function(result){
             console.log("callWebAPI-Success");
             NAVerticalTableForDynamo.build($('#tbl'), result);
+          },
+          error:function(){
+            console.log("callWebAPI-Error");
+          }
+        });
+      };  
+      function callWebAPI3(url){
+        $.ajax({
+          type:"POST",
+          url:url,
+          dataType:"jsonp",
+          jsonpCallback:"pad",
+          contentType:"application/json",
+          success:function(result){
+            console.log("callWebAPI-Success");
+            NAVerticalTable.build($('#tbl'), result);
           },
           error:function(){
             console.log("callWebAPI-Error");

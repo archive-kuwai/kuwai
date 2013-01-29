@@ -17,6 +17,9 @@ end
 
 def one(tenant,range_value)
   item = Dynamo.db.tables["kuwai_records"].load_schema.items[tenant, range_value]
+  p "-----"
+  p item
+  p "-----"
   Jsonp.jsonp_from_dynamo_item_attrs item
 end
 
