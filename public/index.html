@@ -74,10 +74,12 @@
         $.ajax({
           type:"GET",
           url:"/signin",
-          dataType:"json",
-          contentType:"application/json",
+          dataType:"html",
+          contentType:"application/html",
           success:function(result){
-            $("#main_content").html(result.string);
+            console.log("SUCCESS!");
+            console.log(result);
+            $("#main_content").html(result);
           },
           error:function(result){
             console.log("callWebAPI-Error");
