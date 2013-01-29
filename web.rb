@@ -10,7 +10,7 @@ load_backyard
 get '/' do "Hello! :)" end
 
 before do
-  content_type:json
+  content_type :json
 end
 
 
@@ -64,8 +64,21 @@ post '/api/*/*' do |ask_by_json, verify_length|
   end
 end
 
+get '/login' do
+  content_tyep :html
+  erb :login
+end
 
+__END__
 
-
-
-
+@@login
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Inline template</title>
+  </head>
+  <body>
+    <h1>Worked!</h1>
+  </body>
+</html>
