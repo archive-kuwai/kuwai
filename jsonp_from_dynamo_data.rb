@@ -27,15 +27,24 @@ module Jsonp
   end
 
   def self.json(dynamo_item)
-    json_version3(dynamo_item)
+    json_version4(dynamo_item)
   end
 
 
-  #-----------------------------
-  def self.json_version1(dynamo_item)
-    JSON.generate dynamo_item.attributes.to_h
+  #--------------------------------------------
+  def self.json_version4(dynamo_item) 
+    p dynamo_item
+    "{\"hash value\":\"#{dynamo_item.hash_value}\",\"range value\":\"#{dynamo_item.range_value}\"}"
+  end
+
+  #--------------------------------------------
+  def self.json_version3(dynamo_item) 
+    p dynamo_item
+    # '{"range_value":"' + dynamo_item.range_value + '"}')
+    "{\"届タイトル\":\"#{dynamo_item.hash_value}\",\"提出\":\"#{dynamo_item.range_value}\"}"
   end
   
+  #-----------------------------
   def self.json_version2(dynamo_item)
 p dynamo_item
 p dynamo_item.attributes.count
@@ -54,11 +63,9 @@ p attr
     s += '}'
   end
   
-  #--------------------------------------------
-  def self.json_version3(dynamo_item) 
-    p dynamo_item
-    # '{"range_value":"' + dynamo_item.range_value + '"}')
-    "{\"届タイトル\":\"#{dynamo_item.hash_value}\",\"提出\":\"#{dynamo_item.range_value}\"}"
+  #-----------------------------
+  def self.json_version1(dynamo_item)
+    JSON.generate dynamo_item.attributes.to_h
   end
   
 end
