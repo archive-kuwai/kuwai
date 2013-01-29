@@ -1,4 +1,4 @@
-#encoding:utf-8
+#coding:utf-8
 require 'aws/dynamo_db'
 require './dynamo_connect.rb'
 require './jsonp_from_dynamo_data.rb'

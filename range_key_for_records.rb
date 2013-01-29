@@ -1,4 +1,4 @@
-#encoding:utf-8
+#coding:utf-8
 require 'securerandom'
 
 DAY = %w(日 月 火 水 木 金 土)

@@ -74,6 +74,11 @@ end
 __END__
 
 @@signin
-<h1>どう？Sign-in!</h1>
+<h1>Sign-in!</h1>
+  <input id="login_input_uid" type="text" placeholder="email"></input>
+  <input id="login_input_pw" type="password" placeholder="password"></input>
+  <input type="button" onClick="try">サインインする</input>
+
+
 
 

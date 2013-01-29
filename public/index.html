@@ -52,7 +52,7 @@
       </nav>
 
       <div id='login' class='right'>
-        <button type="button" id='login_user' onClick="$('#login_dialog').dialog('open')" class='round_rect pink'>ログイン</button>
+        <button type="button" id='login_user' onClick="loadSignin()" class='round_rect pink'>ログイン</button>
       </div>
       
       <hr/>
@@ -68,7 +68,26 @@
     <footer>
       <hr/>&copy; 2012 Naohiro OHTA
     </footer>
-
+    <script>
+      function loadSignin(){
+        console.log("loadSignin");
+        $.ajax({
+          type:"GET",
+          url:"/signin",
+          dataType:"json",
+          contentType:"application/json",
+          success:function(result){
+            $("#main_content").html(result.string);
+          },
+          error:function(result){
+            console.log("callWebAPI-Error");
+            console.log(result);
+            $("#main_content").html(result.responseText);
+          }
+        });
+      };  
+    </script>
+    
     <script>
       var func_on_click = function(hash,range){
         obj = {

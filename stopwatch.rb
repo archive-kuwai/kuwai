@@ -1,3 +1,4 @@
+#coding:utf-8
 # not available as multi-instance
 class Stopwatch
   @start

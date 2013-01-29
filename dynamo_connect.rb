@@ -1,3 +1,4 @@
+#coding:utf-8
 require './stopwatch.rb'
 sw = Stopwatch.new("require");
 require 'aws/sts'
