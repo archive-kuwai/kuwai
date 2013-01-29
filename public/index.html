@@ -71,7 +71,17 @@
 
     <script>
       var func_on_click = function(hash,range){
-        callWebAPI("/one/"+hash+"/"+range);
+        s = {
+          "who":{
+            "email":"naohta@gmail.com",
+            "key":"XYZ123456789",
+            "proc":"abcdefg-hijk"},
+          "method":"one",
+          "params":[hash,range]
+        };
+        console.log(s);
+        console.log(JSON.stringify(s));
+        //callWebAPI("/api/" + s);
       };
       function callWebAPI(url){
         $.ajax({

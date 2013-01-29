@@ -61,6 +61,8 @@ table {
 .key {
   color: #8e918f; }
 
+.small{color:#8e918f; font-size:9pt}
+
 .ajax_history_not_received {
   margin: 1px;
   background-color: #8e918f;

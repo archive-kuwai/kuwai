@@ -32,15 +32,26 @@ module Jsonp
 
 
   #--------------------------------------------
+  def self.json_version6(dynamo_item) 
+    p dynamo_item
+    "{\"\":\"#{dynamo_item.range_value}\"}"
+  end
+
+  #--------------------------------------------
+  def self.json_version5(dynamo_item) 
+    p dynamo_item
+    "\"#{dynamo_item.range_value}\""
+  end
+
+  #--------------------------------------------
   def self.json_version4(dynamo_item) 
     p dynamo_item
-    "{\"hash value\":\"#{dynamo_item.hash_value}\",\"range value\":\"#{dynamo_item.range_value}\"}"
+    "{\"hash\":\"#{dynamo_item.hash_value}\",\"range\":\"#{dynamo_item.range_value}\"}"
   end
 
   #--------------------------------------------
   def self.json_version3(dynamo_item) 
     p dynamo_item
-    # '{"range_value":"' + dynamo_item.range_value + '"}')
     "{\"届タイトル\":\"#{dynamo_item.hash_value}\",\"提出\":\"#{dynamo_item.range_value}\"}"
   end
   

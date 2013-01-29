@@ -54,9 +54,12 @@ post '/api/*/*' do |ask_by_json, verify_length|
   p ask["method"]
   p ask["params"][0]
   p ask["params"][1]
+  prms = ask["params"]
   case ask["method"]
     when "list" then
-      return list_records(ask["params"][0],ask["params"][1]);
+      return list_records(prms[0],prms[1]);
+    when "one" then
+      return one prms[0],prms[1]
     else
   end
 end

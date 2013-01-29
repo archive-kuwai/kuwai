@@ -7,26 +7,22 @@ var NAVerticalTableForDynamo = function(){
 	// --------------------------------------------
 	// Private members
 	// --------------------------------------------
-	var tr = function(data){return "<tr onclick='var v=$(this).find(\".value\"); func_on_click($(v[0]).text(),$(v[1]).text());'>" + data + "</tr>";};
-	var td1 = function(data){return "<td>" + data + "</td>";};
+	var tr = function(data){return "<tr onclick='var h=$(this).find(\".hash\");var r=$(this).find(\".range\");func_on_click($(h).text(),$(r).text());'>" + data + "</tr>";};
+	//var td1 = function(data){return "<td>" + data + "</td>";};
 	var td2 = function(data){return "<td align='left' style='width:100%;word-break:break-all;'>" + data + "</td>";};
 
-	var dig = function(s/*string*/,o/*object*/,parentkey){
+	var dig = function(record){
+	    
+		// ----------------------------------
 		// dig function 's private functions.
-		var li = function(data){return "<li style='list-style-type:none'>" + data + "</li>";};
-		var spanForKey = function(k){return "<span class='key'>" +k+ "</span>";};
-		var spanForValue = function(i){return "<span class='value'>" +i+ "</span>";};
+		// ----------------------------------
+		var hash = function(k){return "<span class='small hash'>" +k+ "</span><br>";};
+		var range = function(i){return "<span class='range'>" +i+ "</span>";};
+		
+		// ----------------------------------
 		// dig function 's  main procedure.
-		for(var k in o){
-			var v = o[k];
-			var keyInJpn = NALocalizer.toJpn(k);
-			var dottedKey = (parentkey) ? parentkey+"."+keyInJpn : keyInJpn;
-			if(typeof(v)=='object')
-				s = dig(s,v,dottedKey);
-			else
-				s += li(spanForKey(dottedKey)+" "+spanForValue(v));
-		}
-		return s;
+		// ----------------------------------
+		return hash(record["hash"]) + " " + range(record["range"]);
 	};
 	
 	// --------------------------------------------
@@ -36,7 +32,7 @@ var NAVerticalTableForDynamo = function(){
 		build: function($tbl, records){
 			$tbl.empty();
 			for(var i=0; i<records.length; i++){
-				$tbl.append(tr(td1(i+1)+td2(dig("",records[i]))));
+				$tbl.append(tr(/*td1(" ")+*/td2(dig(records[i]))));
 			}
 		}
 	};
