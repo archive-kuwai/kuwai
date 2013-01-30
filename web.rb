@@ -65,7 +65,7 @@ post '/api/*/*' do |ask_by_json, verify_length|
 end
 
 get '/signin' do
-  content_type :json
+  content_type :txt
   erb :signin
 
 end
