@@ -2,9 +2,9 @@
 
 module Jsonp
 
-  public #--------------------
+  public
   def self.jsonp_from_dynamo_item(dynamo_item)
-    pad json(dynamo_item) 
+    pad arrayed json(dynamo_item)
   end
 
   def self.jsonp_from_dynamo_items(dynamo_items)
@@ -14,16 +14,20 @@ module Jsonp
       if(first) then first=false else s+="," end
       s += json dynamo_item
     }
-    pad s
+    pad arrayed s
   end
 
   def self.jsonp_from_dynamo_item_attrs(dynamo_item)
-    pad json_version2(dynamo_item) 
+    pad arrayed json_version2(dynamo_item) 
   end
 
-  private #--------------------
-  def self.pad(s) #for JSON with Padding
-    "pad([" + s + "])"
+  private
+  def self.pad(s)
+    s #"pad(#{s})"
+  end
+
+  def self.arrayed(s)
+    "[#{s}]"
   end
 
   def self.json(dynamo_item)

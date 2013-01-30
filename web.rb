@@ -7,7 +7,7 @@ def load_backyard
 end
 load_backyard
 
-get '/' do "Hello! :)" end
+get '/' do "Hello! :) I'm made by Naohiro OHTA" end
 
 before do
   content_type :json
@@ -42,24 +42,30 @@ get '/one/*/*' do |tenant,range_value|
 end
 #------------------------------------------
 
-post '/api/*/*' do |ask_by_json, verify_length|
-  p ask_by_json.length 
-  p verify_length.to_i
-  #if(ask_by_json.length != verify_length.to_i) then return "Verify failed" end
+def pad(callback_name, s)
+  if(callback_name.length == 0) then
+    return s
+  else
+    return "#{callback_name}(#{s})"
+  end
+end
 
-  ask = JSON.parse(ask_by_json)
-  if( ! auth(ask["who"]["email"],ask["who"]["key"])) then return "Wrong email or password" end
+post '/api/*/*/*' do |callback_name, verify_length, ask_json|
+  if(ask_json.length != verify_length.to_i) then 
+    return "Verify failed.. Your json has #{ask_json.length} letters. We expected #{verify_length.to_i} letters one."
+  end
   
+  ask = JSON.parse(ask_json)
+  who = ask["who"]
+  md = ask["method"]
   
-  p ask["method"]
-  p ask["params"][0]
-  p ask["params"][1]
-  prms = ask["params"]
-  case ask["method"]
+  if( ! auth(who[0],who[1])) then return "Wrong email or password" end
+  
+  case md[0]
     when "list" then
-      return list_records(prms[0],prms[1]);
+      return pad callback_name,records(md[1],md[2])
     when "one" then
-      return one prms[0],prms[1]
+      return pad callback_name,record(md[1],md[2])
     else
   end
 end
