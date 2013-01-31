@@ -7,7 +7,7 @@ var NAAjax2 = function(){
 	// --------------------------------------------
 	// Private members
 	// --------------------------------------------
-	var who = [];
+	var who = ["","",""];
 	var http_client_uuid = "not yet initialized";
 	$(function(){http_client_uuid=uuid.v4();});
 	
