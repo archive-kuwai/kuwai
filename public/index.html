@@ -26,6 +26,7 @@
 
     <script src="http://crypto-js.googlecode.com/svn/tags/3.0.1/build/rollups/sha256.js"></script>
     <script src="js2/NAAjax.js"></script>
+    <script src="js2/NAAjax2.js"></script>
     <script src="js2/NAAjax_HistoryDisplayExtension.js"></script>
     <script src="js1/uuid.js"></script>
     <script src="js2/setOptionsToSelect.js"></script>
@@ -73,9 +74,8 @@
         console.log("loadSignin");
         $.ajax({
           type:"GET",
-          url:"/signin",
+          url:"/sign_in_gate",
           dataType:"html",
-          contentType:"application/html",
           success:function(result){
             console.log("SUCCESS!");
             console.log(result);
