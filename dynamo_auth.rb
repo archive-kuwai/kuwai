@@ -3,6 +3,9 @@ require 'aws/dynamo_db'
 require './dynamo_connect.rb'
 
 def auth(email,key)
+  if(email==nil || email=='') then return false end
+  if(key==nil || key=='') then return false end
+  
   attrs = Dynamo.db.tables["kuwai_endusers"].load_schema.items[email].attributes
   if(attrs.count>=1 && attrs["key"]==key) then
     return true
