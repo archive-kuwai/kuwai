@@ -21,14 +21,14 @@ var NAAjax2 = function(){
 		AJAX_ID: -1,
 		AJAX_REQUEST_TIME: [],
 		
-		set_who: function(email,pw,jquery_object_node_for_display_email){
+		set_who: function(email, pw, func_when_success){
 			who = [
 			    email,
 			    CryptoJS.SHA256(email+"kkuwaii"+pw).toString(CryptoJS.enc.HEX),
 			    http_client_uuid
 			];
 			this.ajax("post", "", ["auth"], function(){
-    			if(jquery_object_node_for_display_email != null) jquery_object_node_for_display_email.text(email);
+    			if(func_when_success != null) func_when_success(who[0]);
 			});
 		},
 		

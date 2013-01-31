@@ -4,7 +4,9 @@
 <input type="button" onclick="try_sign_in()">
 <script>
   var try_sign_in = function(){
-    NAAjax2.set_who( $("#email").val(), $("#pw").val(), $("#sign_in") );
+    NAAjax2.set_who( $("#email").val(), $("#pw").val(), function(email){
+        alert(email);
+    });
     $("#email").val("");
     $("#pw").val("");
   };
