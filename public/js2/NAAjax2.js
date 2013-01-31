@@ -27,7 +27,9 @@ var NAAjax2 = function(){
 			    CryptoJS.SHA256(email+"kkuwaii"+pw).toString(CryptoJS.enc.HEX),
 			    http_client_uuid
 			];
-			if(jquery_object_node_for_display_email != null) jquery_object_node_for_display_email.text(email);
+			this.ajax("post", "", ["auth"], function(){
+    			if(jquery_object_node_for_display_email != null) jquery_object_node_for_display_email.text(email);
+			});
 		},
 		
 		ajax: function(get_or_post, callback_name, method_array, success_funciton){

@@ -34,9 +34,8 @@ post '/api/*/*/*' do |callback_name, verify_length, asking_json|
       return pad callback_name,records(mthd[1],mthd[2])
     when "one" then
       return pad callback_name,record(mthd[1],mthd[2])
-    when "sign_in_gate" then
-      content_type :html
-      return erb :sign_in_gate
+    when "auth" then
+      return pad callback_name,"OK! Authed!"
     else
   end
 end
