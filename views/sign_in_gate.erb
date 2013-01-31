@@ -1,18 +1,11 @@
 <h1>Sign-in!</h1>
 <input id="email" type="email" placeholder="Your Email">
-<input id="password" type="password" placeholder="Password">
-<input type="button" onClick="try_sign_in()">
+<input id="pw" type="password" placeholder="Password">
+<input type="button" onclick="try_sign_in()">
 <script>
-  var _who_=["","",uuid.v4()];
-  
   var try_sign_in = function(){
-    _who_[0] = $("#email").val();
-    _who_[1] = $("#password").val();
+    NAAjax2.set_who( $("#email").val(), $("#pw").val(), $("#sign_in") );
     $("#email").val("");
-    $("#password").val("");
+    $("#pw").val("");
   };
-  
-  
-
-
 </script>

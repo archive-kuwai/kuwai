@@ -53,7 +53,7 @@
       </nav>
 
       <div id='login' class='right'>
-        <button type="button" id='login_user' onClick="loadSignin()" class='round_rect pink'>ログイン</button>
+        <button type="button" id='sign_in' onClick="load_sign_in_gate()" class='round_rect pink'>Sign in</button>
       </div>
       
       <hr/>
@@ -67,17 +67,16 @@
     </section>
 
     <footer>
-      <hr/>&copy; 2012 Naohiro OHTA
+      <hr/>&copy; 2013 Naohiro OHTA
     </footer>
+    
     <script>
-      function loadSignin(){
-        console.log("loadSignin");
+      function load_sign_in_gate(){
         $.ajax({
           type:"GET",
           url:"/sign_in_gate",
           dataType:"html",
           success:function(result){
-            console.log("SUCCESS!");
             console.log(result);
             $("#main_content").html(result);
           },
@@ -149,70 +148,6 @@
       });
     </script>
     <!-- ---------------------------------------- -->
-    <!-- Login Dialogs --------------------------------------------------------->
-    <div id="login_dialog">
-      <input id="login_input_uid" type="text" placeholder="ユーザーネーム"></input>
-      <input id="login_input_pw" type="password" placeholder="パスワード"></input>
-    </div>
-    <script>
-      function callWebAPI2(url){
-        $.ajax({
-          type:"GET",
-          url:url,
-          dataType:"jsonp",
-          jsonpCallback:"pad",
-          contentType:"application/json",
-          success:function(result){
-            console.log("callWebAPI2-Success");
-            NAVerticalTableForDynamo.build($('#tbl'), result);
-          },
-          error:function(){
-            console.log("callWebAPI2-Error");
-          }
-        });
-      };  
-      $(function(){
-        $('#login_dialog').dialog({
-          autoOpen:false, title:'Login3', closeOnEscape:true, modal:true,
-          open:function(){NAKey.setTabstops($(this).parent());},
-          close:function(){NAKey.setTabstops($("#main_content"))},
-          buttons:{
-            "OK":function(){
-              $('#login_user').text("…");
-              NAAjax.setWho($("#login_input_uid").val(), $("#login_input_pw").val(),$("#who_am_i"));
-              var when_succeed = function(result){
-                var maxLength = 5;
-                $('#login_user').text(cutStringByLength(result.realname, maxLength));
-                $('#login_user').removeClass("pink");
-                $('#login_user').addClass("white_weak");
-                build_page_selector();
-                ios_safari_hide_url_bar();
-              };
-              NAAjax.ajax({name:"getPerson",params:{a:5,b:6,c:7}}, when_succeed);               
-              $(this).dialog('close');
-            }
-          }
-        });
-      });
-    </script>   
-    <!--------------------------------------------------------- Login Dialogs -->
-
-    <!-- Ajax Dialogs ---------------------------------------------------------->
-    <div id="ajax_status_dialog"><div id='ajax_history_box'></div></div>
-    <script>
-      $(function(){
-        $('#ajax_status_dialog').dialog({
-          autoOpen:false, title:'Ajax Status', closeOnEscape:true, modal:false,
-          open:function(){NAKey.setTabstops($(this).parent());},
-          close:function(){NAKey.setTabstops($("#main_content"))},
-          buttons:{
-            "OK":function(){$(this).dialog('close');}
-          }
-        });
-      });
-    </script>
-    <!---------------------------------------------------------- Ajax Dialogs -->
 
   </body>
-
 </html>

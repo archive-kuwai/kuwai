@@ -1,8 +1,8 @@
 /**
- * NAAjax2.js by Naohiro OHTA, All Rights Reserved.
+ * NAAjaxPageLoader.js by Naohiro OHTA, All Rights Reserved.
  */
 
-var NAAjax2 = function(){
+var NAAjaxPageLoader = function(){
 
 	// --------------------------------------------
 	// Private members
