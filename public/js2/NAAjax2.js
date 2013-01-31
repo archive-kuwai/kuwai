@@ -30,7 +30,7 @@ var NAAjax2 = function(){
 			if(jquery_object_node_for_display_email != null) jquery_object_node_for_display_email.text(email);
 		},
 		
-		ajax: function(callback_name, method_array, success_funciton){
+		ajax: function(get_or_post, callback_name, method_array, success_funciton){
 			if(who == []){console.log("No sign-in info. So I didnt do ajax call.");return false;}
             if(callback_name == null) callback_name="";
 
@@ -40,11 +40,11 @@ var NAAjax2 = function(){
             
             var asking = {"method":method_array, "who":who};
             var asking_json = JSON.stringify(asking);
-            var uri = "./api/" + callback_name + "/" + asking_json.length + "/" + asking_json;
+            var url = "./api/" + callback_name + "/" + asking_json.length + "/" + asking_json;
             
 			var that = this; $.ajax({
-				type:"POST",
-				url:uri,
+				type:get_or_post,
+				url:url,
 				dataType:"html",
 				success:function(result){
 						console.log("/--- Ajax Success");console.log(result);console.log("---/");
