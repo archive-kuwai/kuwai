@@ -35,7 +35,7 @@ post '/api/*/*/*' do |callback_name, verify_length, asking_json|
     when "one" then
       return pad callback_name,record(mthd[1],mthd[2])
     when "auth" then
-      return pad callback_name,"OK! Authed!"
+      return pad callback_name,"Authed"
     else
   end
 end

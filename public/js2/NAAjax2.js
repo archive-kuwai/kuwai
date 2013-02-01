@@ -21,14 +21,18 @@ var NAAjax2 = function(){
 		AJAX_ID: -1,
 		AJAX_REQUEST_TIME: [],
 		
-		set_who: function(email, pw, func_when_success){
+		set_who: function(email, pw, success_funciton, error_function){
 			who = [
 			    email,
 			    CryptoJS.SHA256(email+"kkuwaii"+pw).toString(CryptoJS.enc.HEX),
 			    http_client_uuid
 			];
-			this.ajax("post", "", ["auth"], function(){
-    			if(func_when_success != null) func_when_success(who[0]);
+			this.ajax("post", "", ["auth"], function(result){
+			    if(result == "Authed"){
+        			if(success_funciton != null) success_funciton(who[0]);
+			    }else{
+        			if(error_function != null) error_function(who[0]);
+			    }
 			});
 		},
 		
@@ -48,10 +52,10 @@ var NAAjax2 = function(){
 				url:url,
 				dataType:"html",
 				success:function(result){
-						console.log("/--- Ajax Success");console.log(result);console.log("---/");
-						success_funciton(result, ajax_id);
-						console.log(this);
-						that.ajaxHistory_OK(ajax_id);
+					console.log("/--- Ajax Success");console.log(result);console.log("---/");
+					success_funciton(result, ajax_id);
+					console.log(this);
+					that.ajaxHistory_OK(ajax_id);
 				},
 				error:function(error){
 					console.log("/--- Ajax Error");console.log(error);console.log("---/");

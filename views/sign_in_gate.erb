@@ -1,13 +1,31 @@
-<h1>Sign-in!</h1>
-<input id="email" type="email" placeholder="Your Email">
-<input id="pw" type="password" placeholder="Password">
-<input type="button" onclick="try_sign_in()">
 <script>
-  var try_sign_in = function(){
-    NAAjax2.set_who( $("#email").val(), $("#pw").val(), function(email){
-        alert(email);
+  $(function(){
+    var try_sign_in = function(){
+      NAAjax2.set_who( $("#email").val(), $("#pw").val(),
+        function(email){
+          alert(email);
+          $("#email").val("");
+          $("#pw").val("");
+        },
+        function(email){
+          $("#A").hide();
+          $("#B").show("slow");
+        });
+    };
+    $("#B-ok").click(function(){
+      $("#B").hide();//"slide",{direction:"right"},"fast");
+      $("#A").show("slow");
     });
-    $("#email").val("");
-    $("#pw").val("");
-  };
+  });
+
 </script>
+
+<h1>Sign-in!</h1>
+<div id ="A" aline="right";>
+  <input id="email" type="email" placeholder="Your Email">
+  <input id="pw" type="password" placeholder="Password">
+  <input type="button" onclick="try_sign_in()">
+</div>
+<div id="B" style="display:none">
+  <input id="B-ok" type="button" value="emailアドレス、もしくは、パスワードがちがいます" class='round_rect pink M'>
+</div>

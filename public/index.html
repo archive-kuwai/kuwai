@@ -58,15 +58,19 @@
       
       <hr/>
     </header>
-
-    <section id='main_content'> <!-- Use form tag for jqKey.js tab/enter key handling -->
+    
+    <main id='main_content'>
+    <!--<section id='main_content'> <!-- Use form tag for jqKey.js tab/enter key handling --> 
       <h1>kuwai</h1>
       <input id="url" type="text" name="How about" placeholder="/list/2013-01  etc..." value='/api/pad/101/{"who":["naohta@gmail.com","XYZ123456789","hjfioeawjfei"],"method":["list","Good Company","2013-01"]}'>
       <input id="btn" type="button" onClick='$("#tbl").empty();callWebAPI($("#url").val())' value='GO'>
       <table id="tbl"></table>
-    </section>
+    <!--</section>-->
+    </main>
 
+    <!--
     <input type="button" onclick='NAAjax2.ajax("post","",["list","Good Company","2013-01"],"")' value='GO'>
+    -->
     <footer>
       <hr/>&copy; 2013 Naohiro OHTA
     </footer>
@@ -90,19 +94,6 @@
     </script>
     
     <script>
-      var func_on_click = function(hash,range){
-        obj = {
-          "who":{
-            "email":"naohta@gmail.com",
-            "key":"XYZ123456789",
-            "proc":"abcdefg-hijk"
-          },
-          "method":"one",
-          "params":[hash,range]
-        };
-        s = JSON.stringify(obj);
-        callWebAPI3("/api/" + s + "/" + s.length);
-      };
       function callWebAPI(url){
         $.ajax({
           type:"POST",
