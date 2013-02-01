@@ -1,31 +1,51 @@
 <script>
-  $(function(){
-    var try_sign_in = function(){
-      NAAjax2.set_who( $("#email").val(), $("#pw").val(),
-        function(email){
-          alert(email);
-          $("#email").val("");
-          $("#pw").val("");
-        },
-        function(email){
-          $("#A").hide();
-          $("#B").show("slow");
-        });
-    };
-    $("#B-ok").click(function(){
-      $("#B").hide();//"slide",{direction:"right"},"fast");
-      $("#A").show("slow");
-    });
+  var slide = function(id0,id1){
+    if(id0 != "WAIT")
+      $("#"+id0).hide("slide",{direction:"right"},"fast");
+    else
+      $("#"+id0).hide();
+    
+    if(id1 != "WAIT")
+      $("#"+id1).show("slide",{direction:"left"},"normal");
+    else
+      $("#"+id1).show();
+  };
+  
+  $("#WRONG-OK").click(function(){
+    slide("WRONG","INPUT");
   });
-
+  
+  var try_sign_in = function(){
+    slide("INPUT","WAIT");
+    NAAjax2.set_who( $("#email").val(), $("#pw").val(),
+      function(email){
+        $("#email").val("");
+        $("#pw").val("");
+        slide("WAIT","GOOD");
+      },
+      function(email){
+        $("#pw").val("");
+        slide("WAIT","WRONG");
+      });
+  };
 </script>
 
 <h1>Sign-in!</h1>
-<div id ="A" aline="right";>
+
+<div id ="INPUT" aline="right";>
   <input id="email" type="email" placeholder="Your Email">
   <input id="pw" type="password" placeholder="Password">
   <input type="button" onclick="try_sign_in()">
 </div>
-<div id="B" style="display:none">
-  <input id="B-ok" type="button" value="emailアドレス、もしくは、パスワードがちがいます" class='round_rect pink M'>
+
+<div id="WAIT" style="display:none">
+  <img src='pict/loading(ShigenoriTanaka)_f_ww_01_s1.gif'></img>
+</div>
+
+<div id="WRONG" style="display:none">
+  <input id="WRONG-OK" type="button" value="emailアドレス、もしくは、パスワードがちがいます" class='round_rect pink M'>
+</div>
+
+<div id="GOOD" style="display:none">
+  <h2>Yaaay!</h2>
 </div>
