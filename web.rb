@@ -45,3 +45,7 @@ get '/sign_in_gate' do
   erb:sign_in_gate
 end
 
+get '/sample' do
+  content_type :txt
+  erb:sample
+end

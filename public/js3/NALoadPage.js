@@ -12,7 +12,8 @@ var NALoadPage = function(){
 	// Public members
 	// --------------------------------------------
 	return{
-        load: function(id, url){
+        load: function(url, id){
+            if(id==null || id=="") id="content";
             var ELEMENT = $("#"+id);
             NASlide.slide(id, "WAIT");
             $.ajax({
