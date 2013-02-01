@@ -40,6 +40,8 @@
     <script src="js2/NAKey.js"></script>
     <script src="js1/jquery.cookie.js"></script><script>$(function(){$.cookie.json = true;});</script>
     <script src="js3/do_you_really_want_to_close.js"></script>
+    <script src="js3/NASlide.js"></script>
+    <script src="js3/NALoadPage.js"></script>
   </head>
 
   <body>
@@ -53,20 +55,32 @@
       </nav>
 
       <div id='login' class='right'>
-        <button type="button" id='sign_in' onClick="load_sign_in_gate()" class='round_rect pink'>Sign in</button>
+        <button type="button" id='sign_in' onClick="NALoadPage.load('content','sign_in_gate')" class='round_rect pink'>Sign in</button>
       </div>
       
       <hr/>
     </header>
-    
-    <main id='main_content'>
+
+    <main>
     <!--<section id='main_content'> <!-- Use form tag for jqKey.js tab/enter key handling --> 
-      <h1>kuwai</h1>
-      <input id="url" type="text" name="How about" placeholder="/list/2013-01  etc..." value='/api/pad/101/{"who":["naohta@gmail.com","XYZ123456789","hjfioeawjfei"],"method":["list","Good Company","2013-01"]}'>
-      <input id="btn" type="button" onClick='$("#tbl").empty();callWebAPI($("#url").val())' value='GO'>
-      <table id="tbl"></table>
-    <!--</section>-->
+      <div id="content">
+        <h1>kuwai</h1>
+        <h5>
+          I'm kuwai, made by Naohiro OHTA.<br>
+          kuawai is webapi.<br>
+          And also webapp yah this site you're seeing<br>
+        </h5>
+        <!--
+        <input id="url" type="text" name="How about" placeholder="/list/2013-01  etc..." value='/api/pad/101/{"who":["naohta@gmail.com","XYZ123456789","hjfioeawjfei"],"method":["list","Good Company","2013-01"]}'>
+        <input id="btn" type="button" onClick='$("#tbl").empty();callWebAPI($("#url").val())' value='GO'>
+        <table id="tbl"></table>
+        -->
+      </div>
+      <div id="WAIT" style="display:none">
+        <img src='pict/loading(ShigenoriTanaka)_f_ww_01_s1.gif'></img>
+      </div>
     </main>
+
 
     <!--
     <input type="button" onclick='NAAjax2.ajax("post","",["list","Good Company","2013-01"],"")' value='GO'>
@@ -74,25 +88,7 @@
     <footer>
       <hr/>&copy; 2013 Naohiro OHTA
     </footer>
-    
-    <script>
-      function load_sign_in_gate(){
-        $.ajax({
-          type:"GET",
-          url:"/sign_in_gate",
-          dataType:"html",
-          success:function(result){
-            console.log(result);
-            $("#main_content").html(result);
-          },
-          error:function(result){
-            console.log("WebAPI-Error");
-            console.log(result);
-          }
-        });
-      };  
-    </script>
-    
+        
     <script>
       function callWebAPI(url){
         $.ajax({
