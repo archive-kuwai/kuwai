@@ -41,16 +41,7 @@ post '/api/*/*/*' do |callback_name, verify_length, asking_json|
   end
 end
 
-get '/sign_in_gate' do
-  content_type :txt
-  erb:sign_in_gate
-end
-
-get '/page_selector' do
-  content_type :txt
-  erb:page_selector
-end
-get '/sample' do
-  content_type :txt
-  erb:sample
+get '/page/*' do |page_name|
+  content_type:txt
+  erb page_name.intern
 end

@@ -47,7 +47,7 @@ var NAAjax2 = function(){
             
             var asking = {"method":method_array, "who":who};
             var asking_json = JSON.stringify(asking);
-            var url = "./api/pad/" + asking_json.length + "/" + asking_json;
+            var url = /* "http://kuwai.herokuapp.com/" */ "./api/pad/" + asking_json.length + "/" + asking_json;
             
 			var that = this; $.ajax({
 				type:"post",

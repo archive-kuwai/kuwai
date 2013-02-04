@@ -2,5 +2,14 @@
 <h5>Hi! Select page.</h5>
 
 <script>
-  build_page_selector();
+  (function build_page_selector(){
+    var pages = ["page0","sample","jQuery_support","kuwai"];
+    var alias = pages; alias[0]="ページ";
+    $("#page_selector").removeClass("hidden");
+    $("#page_selector").empty();
+    for(var i=0; i<pages.length; i++){
+      $('#page_selector').append("<option value='" +pages[i]+ "' id='" +pages[i]+ "'>" + alias[i] + "</option>");
+    }
+    $("#page_selector").focus();
+  })();
 </script>

@@ -18,7 +18,7 @@ var NALoadPage = function(){
             NASlide.slide(id, "WAIT");
             $.ajax({
               type:"GET",
-              url:url,
+              url:"./page/" + url,
               dataType:"html",
               success:function(result){
                 ELEMENT.html(result);

@@ -45,7 +45,7 @@
   <body>
     <header>
       <nav class='left'>
-        <select id="page_selector" onChange="load_page_as_main_content($('#page_selector').val())" class="hidden" style="width:160px"></select>
+        <select id="page_selector" onChange="NALoadPage.load($('#page_selector').val())" class="hidden" style="width:160px"></select>
       </nav>
       <div id='login' class='right'>
         <button type="button" id='sign_in' onClick="NALoadPage.load('sign_in_gate')" class='round_rect pink'>Sign in</button>
@@ -76,16 +76,6 @@
         NAKey.setEnterkeyMode(3);
         NALocalizer.loadMapFromServer();
       });
-			function build_page_selector(){
-				var pages = ["page0","sample","jQuery_support","kuwai"];
-				var alias = pages; alias[0]="ページ";
-				$("#page_selector").removeClass("hidden");
-				$("#page_selector").empty();
-				for(var i=0; i<pages.length; i++){
-					$('#page_selector').append("<option value='" +pages[i]+ "' id='" +pages[i]+ "'>" + alias[i] + "</option>");
-				}
-				$("#page_selector").focus();
-			}
     </script>
   </body>
 </html>
