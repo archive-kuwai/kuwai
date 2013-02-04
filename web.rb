@@ -19,6 +19,7 @@ def pad(callback_name, content)
 end
 
 post '/api/*/*/*' do |callback_name, verify_length, asking_json|
+  p params[:callback]
   if(asking_json.length != verify_length.to_i) then 
     return "Verify failed.. Your json has #{asking_json.length} letters. We expected #{verify_length.to_i} letters one."
   end
@@ -27,15 +28,15 @@ post '/api/*/*/*' do |callback_name, verify_length, asking_json|
   who = ask["who"]
   mthd = ask["method"]
   p who
-  if( ! auth(who[0],who[1])) then return pad callback_name,'["Wrong_email_or_password"]' end
+  if( ! auth(who[0],who[1])) then return pad params[:callback],'["Wrong_email_or_password"]' end
   
   case mthd[0]
     when "list" then
-      return pad callback_name,records(mthd[1],mthd[2])
+      return pad params[:callback],records(mthd[1],mthd[2])
     when "one" then
-      return pad callback_name,record(mthd[1],mthd[2])
+      return pad params[:callback],record(mthd[1],mthd[2])
     when "auth" then
-      return pad callback_name,'["Authed"]'
+      return pad params[:callback],'["Authed"]'
     else
   end
 end

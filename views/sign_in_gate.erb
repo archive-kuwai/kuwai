@@ -15,6 +15,9 @@
       function(email){
         $("#pw").val("");
         NASlide.slide("WAIT","WRONG");
+      },
+      function(email){
+        NASlide.slide("WAIT","WRONG_AJAX");
       });
   };
 </script>
@@ -29,6 +32,10 @@
 
 <div id="WRONG" style="display:none">
   <input id="WRONG-OK" type="button" value="emailアドレス、もしくは、パスワードがちがうようです。。" class='round_rect pink M'>
+</div>
+
+<div id="WRONG_AJAX" style="display:none">
+  <input id="WRONG-OK" type="button" value="データセンターと通信が行えませんでした。。" class='round_rect pink M'>
 </div>
 
 <div id="GOOD" style="display:none">

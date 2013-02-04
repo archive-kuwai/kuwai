@@ -21,22 +21,25 @@ var NAAjax2 = function(){
 		AJAX_ID: -1,
 		AJAX_REQUEST_TIME: [],
 		
-		set_who: function(email, pw, success_funciton, error_function){
+		set_who: function(email, pw, success_funciton, error_function, ajax_error_function){
 			who = [
 			    email,
 			    CryptoJS.SHA256(email+"kkuwaii"+pw).toString(CryptoJS.enc.HEX),
 			    http_client_uuid
 			];
-			this.ajax(["auth"], function(result){
-			    if(result == "Authed"){
-        			if(success_funciton != null) success_funciton(who[0]);
-			    }else{
-        			if(error_function != null) error_function(who[0]);
-			    }
-			});
+			this.ajax(["auth"], 
+			    function(result){
+    			    if(result == "Authed"){
+            			if(success_funciton != null) success_funciton(who[0]);
+    			    }else{
+            			if(error_function != null) error_function(who[0]);
+    			    }
+    			}, 
+    			ajax_error_function
+    		);
 		},
 		
-		ajax: function(method_array, success_funciton){
+		ajax: function(method_array, success_funciton, error_function){
 			callback_name="pad";
 			this.AJAX_ID++; var ajax_id = this.AJAX_ID; this.AJAX_REQUEST_TIME[ajax_id] = new Date();
 			this.ajaxHistory_Req(ajax_id, method_array);
@@ -50,15 +53,15 @@ var NAAjax2 = function(){
 				type:"post",
 				url:url,
 				dataType:"jsonp",
-				jsonpCallback:"pad",
 				success:function(result){
 					console.log("/--- Ajax Success");console.log(result);console.log("---/");
 					success_funciton(result, ajax_id);
 					console.log(this);
 					that.ajaxHistory_OK(ajax_id);
 				},
-				error:function(result){
-					console.log("/--- Ajax Error");console.log(result);console.log("---/");
+				error:function(error){
+					console.log("/--- Ajax Error");console.log(error);console.log("---/");
+					error_function(error, ajax_id);
 				}
 			});
 		}
