@@ -7,6 +7,7 @@ var NAAjax2 = function(){
 	// --------------------------------------------
 	// Private members
 	// --------------------------------------------
+	var ROOT = "http://kuwai.herokuapp.com/";
 	var who = [];
 	var http_client_uuid = "not yet initialized";
 	$(function(){http_client_uuid=uuid.v4();});
@@ -47,7 +48,7 @@ var NAAjax2 = function(){
             
             var asking = {"method":method_array, "who":who};
             var asking_json = JSON.stringify(asking);
-            var url = "api/" + asking_json.length + "/" + asking_json;
+            var url = ROOT + "api/" + asking_json.length + "/" + asking_json;
             
 			var that = this; $.ajax({
 				type:"post",
@@ -72,7 +73,7 @@ var NAAjax2 = function(){
             NASlide.slide(id, "WAIT");
             $.ajax({
               type:"GET",
-              url:"page/" + url,
+              url: ROOT + "page/" + url,
               dataType:"html",
               success:function(result){
                 ELEMENT.html(result);
