@@ -11,7 +11,7 @@ end
 get '/' do "Hello! :)   I'm kuwai, made by Naohiro OHTA" end
 
 def pad(callback_name, content)
-  if(callback_name.length == 0) then
+  if(callback_name.strip.length == 0) then
     return content
   else
     return "#{callback_name}(#{content})"
@@ -26,8 +26,8 @@ post '/api/*/*/*' do |callback_name, verify_length, asking_json|
   ask = JSON.parse(asking_json)
   who = ask["who"]
   mthd = ask["method"]
-  
-  if( ! auth(who[0],who[1])) then return "Wrong email or password" end
+  p who
+  if( ! auth(who[0],who[1])) then return pad callback_name,'["Wrong_email_or_password"]' end
   
   case mthd[0]
     when "list" then
@@ -35,7 +35,7 @@ post '/api/*/*/*' do |callback_name, verify_length, asking_json|
     when "one" then
       return pad callback_name,record(mthd[1],mthd[2])
     when "auth" then
-      return pad callback_name,"Authed"
+      return pad callback_name,'["Authed"]'
     else
   end
 end

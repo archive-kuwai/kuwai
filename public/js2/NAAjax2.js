@@ -27,7 +27,7 @@ var NAAjax2 = function(){
 			    CryptoJS.SHA256(email+"kkuwaii"+pw).toString(CryptoJS.enc.HEX),
 			    http_client_uuid
 			];
-			this.ajax("post", "", ["auth"], function(result){
+			this.ajax(["auth"], function(result){
 			    if(result == "Authed"){
         			if(success_funciton != null) success_funciton(who[0]);
 			    }else{
@@ -36,31 +36,31 @@ var NAAjax2 = function(){
 			});
 		},
 		
-		ajax: function(get_or_post, callback_name, method_array, success_funciton){
-            if(callback_name == null) callback_name="";
-
+		ajax: function(method_array, success_funciton){
+			callback_name="pad";
 			this.AJAX_ID++; var ajax_id = this.AJAX_ID; this.AJAX_REQUEST_TIME[ajax_id] = new Date();
 			this.ajaxHistory_Req(ajax_id, method_array);
 			console.log("/--- Ajax Request");console.log(method_array);console.log(who);console.log("---/");
             
             var asking = {"method":method_array, "who":who};
             var asking_json = JSON.stringify(asking);
-            var url = "./api/" + callback_name + "/" + asking_json.length + "/" + asking_json;
+            var url = "./api/pad/" + asking_json.length + "/" + asking_json;
             
 			var that = this; $.ajax({
-				type:get_or_post,
+				type:"post",
 				url:url,
-				dataType:"html",
+				dataType:"jsonp",
+				jsonpCallback:"pad",
 				success:function(result){
 					console.log("/--- Ajax Success");console.log(result);console.log("---/");
 					success_funciton(result, ajax_id);
 					console.log(this);
 					that.ajaxHistory_OK(ajax_id);
 				},
-				error:function(error){
-					console.log("/--- Ajax Error");console.log(error);console.log("---/");
+				error:function(result){
+					console.log("/--- Ajax Error");console.log(result);console.log("---/");
 				}
-			});				
+			});
 		}
 	}
 }();
