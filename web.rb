@@ -11,7 +11,7 @@ end
 get '/' do "Hello! :)   I'm kuwai, made by Naohiro OHTA" end
 
 def pad(callback_name, content)
-  if(callback_name.strip.length == 0) then
+  if(callback_name==nil || callback_name.strip.length==0) then
     return content
   else
     return "#{callback_name}(#{content})"
@@ -45,6 +45,7 @@ post '/api/*/*' do |verify_length, asking_json|
 end
 
 get '/page/*' do |page_name|
+  p params[:callback]
   content_type:txt
-  erb page_name.intern
+  pad params[:callback], erb(page_name.intern)
 end

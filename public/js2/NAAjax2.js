@@ -7,7 +7,8 @@ var NAAjax2 = function(){
 	// --------------------------------------------
 	// Private members
 	// --------------------------------------------
-	var ROOT = "http://kuwai.herokuapp.com/";
+	//var ROOT = "http://kuwai.herokuapp.com/";
+	var ROOT = "";
 	var who = [];
 	var http_client_uuid = "not yet initialized";
 	$(function(){http_client_uuid=uuid.v4();});
@@ -74,8 +75,10 @@ var NAAjax2 = function(){
             $.ajax({
               type:"GET",
               url: ROOT + "page/" + url,
-              dataType:"html",
+              dataType:"txt",
+              crossDomain:true,
               success:function(result){
+                console.log(result);
                 ELEMENT.html(result);
                 NASlide.slide("WAIT",id);
               },
