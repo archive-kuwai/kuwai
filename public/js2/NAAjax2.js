@@ -47,7 +47,7 @@ var NAAjax2 = function(){
             
             var asking = {"method":method_array, "who":who};
             var asking_json = JSON.stringify(asking);
-            var url = /* "http://kuwai.herokuapp.com/" */ "./api/pad/" + asking_json.length + "/" + asking_json;
+            var url = "api/" + asking_json.length + "/" + asking_json;
             
 			var that = this; $.ajax({
 				type:"post",
@@ -64,7 +64,29 @@ var NAAjax2 = function(){
 					error_function(error, ajax_id);
 				}
 			});
-		}
+		},
+		
+        load_page: function(url, id){
+            if(id==null || id=="") id="content";
+            var ELEMENT = $("#"+id);
+            NASlide.slide(id, "WAIT");
+            $.ajax({
+              type:"GET",
+              url:"page/" + url,
+              dataType:"html",
+              success:function(result){
+                ELEMENT.html(result);
+                NASlide.slide("WAIT",id);
+              },
+              error:function(result){
+                console.log("Error: NALoadPage.js - load()");
+                console.log(result);
+                ELEMENT.html("<h3>ページを読みこんでいる際にエラーが起きました。<br>お手数ですが、もう一度操作を試していただけますか？</h3>");
+                NASlide.slide("WAIT",id);
+              }
+            });
+        }
+
 	}
 }();
 

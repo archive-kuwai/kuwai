@@ -8,7 +8,7 @@
     <link href="basic.css" rel="stylesheet" >
 
     <!---jQuery--------------------------------------------------------->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
     <!------------------------------------------------------------------>
 
     <!--IE Hacks-------------------------------------------------------->
@@ -18,9 +18,9 @@
     <!------------------------------------------------------------------>
 
     <!---jQuery UI------------------------------------------------------>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.19/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.19/themes/redmond/jquery-ui.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.19/i18n/jquery-ui-i18n.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/redmond/jquery-ui.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery-ui-i18n.min.js"></script>
     <!------------------------------------------------------------------>
 
     <script src="http://crypto-js.googlecode.com/svn/tags/3.0.1/build/rollups/sha256.js"></script>
@@ -40,15 +40,14 @@
     <script src="js1/jquery.cookie.js"></script><script>$(function(){$.cookie.json = true;});</script>
     <script src="js3/do_you_really_want_to_close.js"></script>
     <script src="js3/NASlide.js"></script>
-    <script src="js3/NALoadPage.js"></script>
   </head>
   <body>
     <header>
       <nav class='left'>
-        <select id="page_selector" onChange="NALoadPage.load($('#page_selector').val())" class="hidden" style="width:160px"></select>
+        <select id="page_selector" onChange="NAAjax2.load_page($('#page_selector').val())" class="hidden" style="width:160px"></select>
       </nav>
       <div id='login' class='right'>
-        <button type="button" id='sign_in' onClick="NALoadPage.load('sign_in_gate')" class='round_rect pink'>Sign in</button>
+        <button type="button" id='sign_in' onClick="NAAjax2.load_page('sign_in_gate')" class='round_rect pink'>Sign in</button>
       </div>
       <hr/>
     </header>

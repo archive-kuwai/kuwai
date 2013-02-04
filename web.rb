@@ -18,10 +18,13 @@ def pad(callback_name, content)
   end
 end
 
-post '/api/*/*/*' do |callback_name, verify_length, asking_json|
-  p params[:callback]
-  if(asking_json.length != verify_length.to_i) then 
-    return "Verify failed.. Your json has #{asking_json.length} letters. We expected #{verify_length.to_i} letters one."
+post '/api/*/*' do |verify_length, asking_json|
+  if(verify_length == 0) then
+    # No verification
+  else
+    if(asking_json.length != verify_length.to_i) then 
+      return "Verify failed.. Your json has #{asking_json.length} letters. We expected #{verify_length.to_i} letters one."
+    end
   end
   
   ask = JSON.parse(asking_json)
