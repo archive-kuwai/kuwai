@@ -46,23 +46,18 @@
 
   <body>
     <header>
-
       <nav class='left'>
         <select id="page_selector" onChange="load_page_as_main_content($('#page_selector').val())" class="hidden" style="width:160px"></select>
         <button type="button" id='ajax_status' onClick='$("#ajax_status_dialog").dialog("open")' class="hidden">
           <img id='ajax_status_img' src='pict/loading(ShigenoriTanaka).gif' class="hidden"></img>
         </button>
       </nav>
-
       <div id='login' class='right'>
         <button type="button" id='sign_in' onClick="NALoadPage.load('sign_in_gate')" class='round_rect pink'>Sign in</button>
       </div>
-      
       <hr/>
     </header>
-
     <main>
-    <!--<section id='main_content'> <!-- Use form tag for jqKey.js tab/enter key handling --> 
       <div id="content">
         <h1>kuwai</h1>
         <h5>
@@ -70,61 +65,14 @@
           kuawai is webapi.<br>
           And also webapp yah this site you're seeing<br>
         </h5>
-        <!--
-        <input id="url" type="text" name="How about" placeholder="/list/2013-01  etc..." value='/api/pad/101/{"who":["naohta@gmail.com","XYZ123456789","hjfioeawjfei"],"method":["list","Good Company","2013-01"]}'>
-        <input id="btn" type="button" onClick='$("#tbl").empty();callWebAPI($("#url").val())' value='GO'>
-        <table id="tbl"></table>
-        -->
       </div>
       <div id="WAIT" style="display:none">
         <img src='pict/loading(ShigenoriTanaka)_f_ww_01_s1.gif'></img>
       </div>
     </main>
-
-
-    <!--
-    <input type="button" onclick='NAAjax2.ajax("post","",["list","Good Company","2013-01"],"")' value='GO'>
-    -->
     <footer>
       <hr/>&copy; 2013 Naohiro OHTA
     </footer>
-        
-    <script>
-      function callWebAPI(url){
-        $.ajax({
-          type:"POST",
-          url:url,
-          dataType:"jsonp",
-          jsonpCallback:"pad",
-          contentType:"application/json",
-          success:function(result){
-            console.log("callWebAPI-Success");
-            NAVerticalTableForDynamo.build($('#tbl'), result);
-          },
-          error:function(){
-            console.log("callWebAPI-Error");
-          }
-        });
-      };  
-      function callWebAPI3(url){
-        $.ajax({
-          type:"POST",
-          url:url,
-          dataType:"jsonp",
-          jsonpCallback:"pad",
-          contentType:"application/json",
-          success:function(result){
-            console.log("callWebAPI-Success");
-            NAVerticalTable.build($('#tbl'), result);
-          },
-          error:function(){
-            console.log("callWebAPI-Error");
-          }
-        });
-      };  
-    </script>
-
-    <!-- Initialize ----------------------------- -->
     <script>
       $(function(){
         $("#login_user").focus();
@@ -134,7 +82,5 @@
         NALocalizer.loadMapFromServer();
       });
     </script>
-    <!-- ---------------------------------------- -->
-
   </body>
 </html>
