@@ -1,6 +1,5 @@
 <!DOCTYPE HTML> <!-- Created by Naohiro OHTA, All Rights Reserved. -->
 <html lang="ja">
-
   <head>
     <meta charset="utf-8">
     <title>kuwai by Naohiro OHTA</title>
@@ -43,14 +42,10 @@
     <script src="js3/NASlide.js"></script>
     <script src="js3/NALoadPage.js"></script>
   </head>
-
   <body>
     <header>
       <nav class='left'>
         <select id="page_selector" onChange="load_page_as_main_content($('#page_selector').val())" class="hidden" style="width:160px"></select>
-        <button type="button" id='ajax_status' onClick='$("#ajax_status_dialog").dialog("open")' class="hidden">
-          <img id='ajax_status_img' src='pict/loading(ShigenoriTanaka).gif' class="hidden"></img>
-        </button>
       </nav>
       <div id='login' class='right'>
         <button type="button" id='sign_in' onClick="NALoadPage.load('sign_in_gate')" class='round_rect pink'>Sign in</button>
@@ -75,12 +70,22 @@
     </footer>
     <script>
       $(function(){
-        $("#login_user").focus();
+        $("#sign_in").focus();
         ios_safari_hide_url_bar();
         NAKey.setTabstopForEscKey($("#page_selector"));
         NAKey.setEnterkeyMode(3);
         NALocalizer.loadMapFromServer();
       });
+			function build_page_selector(){
+				var pages = ["page0","sample","jQuery_support","kuwai"];
+				var alias = pages; alias[0]="ページ";
+				$("#page_selector").removeClass("hidden");
+				$("#page_selector").empty();
+				for(var i=0; i<pages.length; i++){
+					$('#page_selector').append("<option value='" +pages[i]+ "' id='" +pages[i]+ "'>" + alias[i] + "</option>");
+				}
+				$("#page_selector").focus();
+			}
     </script>
   </body>
 </html>
