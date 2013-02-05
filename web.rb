@@ -1,7 +1,16 @@
 #coding:utf-8
+
 require 'sinatra'
 require './dynamo_read.rb'
 require './dynamo_write.rb'
+
+@@kuwai_records = Dynamo.db.tables["kuwai_records"].load_schema
+p "-------------------------"
+p @@kuwai_records
+p "-------------------------"
+
+
+
 require './dynamo_auth.rb'
 
 before do
@@ -32,7 +41,7 @@ get '/api/*/*' do |verify_length, asking_json|
   who = ask["who"]
   mthd = ask["method"]
   p who
-  if( ! auth(who[0],who[1])) then return pad params[:callback],'["Wrong_email_or_password"]' end
+  if( ! auth2(who[0],who[1])) then return pad params[:callback],'["Wrong_email_or_password"]' end
   
   case mthd[0]
     when "list" then

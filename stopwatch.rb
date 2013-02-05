@@ -10,6 +10,6 @@ class Stopwatch
   end
   def stop()
     @end = Time.now
-    puts "Finished in #{@end-@start} seconds."
+    puts "Finished in #{(@end-@start)*1000} ms."
   end
 end
