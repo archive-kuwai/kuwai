@@ -18,9 +18,10 @@ def pad(callback_name, content)
   end
 end
 
-post '/api/*/*' do |verify_length, asking_json|
+# Why get, not post - 'cas wanna use jsonp
+get '/api/*/*' do |verify_length, asking_json|
   if(verify_length == 0) then
-    # No verification
+    # Do no verification.
   else
     if(asking_json.length != verify_length.to_i) then 
       return "Verify failed.. Your json has #{asking_json.length} letters. We expected #{verify_length.to_i} letters one."
@@ -42,9 +43,4 @@ post '/api/*/*' do |verify_length, asking_json|
       return pad params[:callback],'["Authed"]'
     else
   end
-end
-
-get '/page/*' do |page_name|
-  content_type:html
-  erb page_name.intern
 end
