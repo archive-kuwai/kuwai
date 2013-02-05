@@ -45,7 +45,6 @@ post '/api/*/*' do |verify_length, asking_json|
 end
 
 get '/page/*' do |page_name|
-  p params[:callback]
-  content_type:txt
-  pad params[:callback], erb(page_name.intern)
+  content_type:html
+  erb page_name.intern
 end

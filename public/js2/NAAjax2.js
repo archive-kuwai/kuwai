@@ -68,15 +68,14 @@ var NAAjax2 = function(){
 			});
 		},
 		
-        load_page: function(url, id){
+        load_page: function(page_name, id){
             if(id==null || id=="") id="content";
             var ELEMENT = $("#"+id);
             NASlide.slide(id, "WAIT");
             $.ajax({
               type:"GET",
-              url: ROOT + "page/" + url,
-              dataType:"txt",
-              crossDomain:true,
+              url: "page/" + page_name,
+              dataType:"html",
               success:function(result){
                 console.log(result);
                 ELEMENT.html(result);
