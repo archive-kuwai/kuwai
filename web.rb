@@ -62,27 +62,32 @@ get '/api/*/*' do |verify_length_as_string, asking_json|
   p who
   
   begin
+    result = ""
+    sw = Stopwatch.new("auth2")
     if( ! auth2(who[0],who[1])) then return pad params[:callback],'["Wrong_email_or_password"]' end
+    sw.stop
     case mthd[0]
       when "list" then
-        return pad params[:callback],records(mthd[1],mthd[2])
+        result = pad params[:callback],records(mthd[1],mthd[2])
       when "one" then
-        return pad params[:callback],record(mthd[1],mthd[2])
+        result = pad params[:callback],record(mthd[1],mthd[2])
       when "auth" then
-        return pad params[:callback],'["Authed"]'
+        result = pad params[:callback],'["Authed"]'
       else
     end
   rescue AWS::STS::Errors
     Dynamo.make_session
     Dynamo.connect
-    p "AWS::STS::Errors ERROR OCCUERED============="
+    p result = "AWS::STS::Errors ERROR OCCUERED============="
   rescue
     Dynamo.make_session
     Dynamo.connect
-    p "STANDARD ERROR OCCUERED========================================"
+    p result = "STANDARD ERROR OCCUERED========================================"
   else
     Dynamo.make_session
     Dynamo.connect
-    p "OTHER ERROR OCCUERED========================================"
+    p result = "OTHER ERROR OCCUERED========================================"
+  ensure
+    return result
   end
 end
