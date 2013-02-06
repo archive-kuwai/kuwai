@@ -1,17 +1,15 @@
 #coding:utf-8
 
 require 'sinatra'
+require './dynamo_connect.rb'
 require './dynamo_read.rb'
 require './dynamo_write.rb'
-
-@@kuwai_records = Dynamo.db.tables["kuwai_records"].load_schema
-p "-------------------------"
-p @@kuwai_records
-p "-------------------------"
-
 require './dynamo_auth.rb'
 
 get '/' do 
+  p Time.now.utc
+  p $session.expires_at
+  p $session.expires_at - Time.now.utc
   content_type:txt
   return <<'EOS'
 Hello! :)   I'm kuwai, made by Naohiro OHTA
@@ -45,7 +43,6 @@ end
 # Why get, not post - 'cas wanna use jsonp
 get '/api/*/*' do |verify_length_as_string, asking_json|
   content_type:json
-  
   verify_length = verify_length_as_string.to_i
   puts "verify_length is,#{verify_length}. asking_json.length is,#{asking_json.length}."
   puts "asking_json is,"
@@ -63,15 +60,29 @@ get '/api/*/*' do |verify_length_as_string, asking_json|
   who = ask["who"]
   mthd = ask["method"]
   p who
-  if( ! auth2(who[0],who[1])) then return pad params[:callback],'["Wrong_email_or_password"]' end
   
-  case mthd[0]
-    when "list" then
-      return pad params[:callback],records(mthd[1],mthd[2])
-    when "one" then
-      return pad params[:callback],record(mthd[1],mthd[2])
-    when "auth" then
-      return pad params[:callback],'["Authed"]'
-    else
+  begin
+    if( ! auth2(who[0],who[1])) then return pad params[:callback],'["Wrong_email_or_password"]' end
+    case mthd[0]
+      when "list" then
+        return pad params[:callback],records(mthd[1],mthd[2])
+      when "one" then
+        return pad params[:callback],record(mthd[1],mthd[2])
+      when "auth" then
+        return pad params[:callback],'["Authed"]'
+      else
+    end
+  rescue AWS::STS::Errors
+    Dynamo.make_session
+    Dynamo.connect
+    p "AWS::STS::Errors ERROR OCCUERED============="
+  rescue
+    Dynamo.make_session
+    Dynamo.connect
+    p "STANDARD ERROR OCCUERED========================================"
+  else
+    Dynamo.make_session
+    Dynamo.connect
+    p "OTHER ERROR OCCUERED========================================"
   end
 end

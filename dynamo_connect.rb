@@ -1,9 +1,7 @@
 #coding:utf-8
 require './stopwatch.rb'
-sw = Stopwatch.new("require");
 require 'aws/sts'
 require 'aws/dynamo_db'
-sw.stop
 
 class Dynamo
 
@@ -25,7 +23,7 @@ class Dynamo
     sw = Stopwatch.new("Create AWS session");
     keys = read_aws_keys
     sts = AWS::STS.new(access_key_id:keys[0],secret_access_key:keys[1])
-    @@session = sts.new_session(duration:60*30)
+    @@session = sts.new_session(duration:60*15)#Seconds. Must be greater than 900 seconds.
     AWS.config({dynamo_db_endpoint:"dynamodb.ap-northeast-1.amazonaws.com"})
     sw.stop
   end
@@ -39,6 +37,14 @@ class Dynamo
       session_token: @@session.credentials[:session_token]
     )
     sw.stop()
+    $session = @@session
+    sw = Stopwatch.new("Load schemas")
+    $kuwai_endusers = Dynamo.db.tables["kuwai_endusers"].load_schema
+    $kuwai_endusers2 = Dynamo.db.tables["kuwai_endusers2"].load_schema
+    $kuwai_records = Dynamo.db.tables["kuwai_records"].load_schema
+    $kuwai_templates = Dynamo.db.tables["kuwai_templates"].load_schema
+    $kuwai_tenants = Dynamo.db.tables["kuwai_tenants"].load_schema
+    sw.stop
   end
   
   def self.db
@@ -53,5 +59,5 @@ class Dynamo
   
   make_session
   connect
-  
 end
+

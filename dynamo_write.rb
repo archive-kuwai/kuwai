@@ -1,6 +1,5 @@
 #coding:utf-8
 require 'aws/dynamo_db'
-require './dynamo_connect.rb'
 require './range_key_for_records.rb'
 
 def create_record(tenant,title)
