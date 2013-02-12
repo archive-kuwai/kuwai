@@ -8,9 +8,12 @@ class Dynamo
   def self.read_aws_keys
     puts __method__
     puts "I will try to read AWS keys from environment variables..."
-    p ENV['AWS_ACCESS_KEY']
-    keys = [ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY']]
+    
+    p ENV['AWS_ACCESS_KEY_ID']
+    #keys = [ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY']]
+    keys = [ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']]
     p keys[0]
+    
     if(keys[0]==nil) then
       puts "No AWS environment variables here. So I will read local secrets file."
       h = Hash[*File.read('.nao.secrets').split(/[ \n]+/)] 
@@ -23,8 +26,8 @@ class Dynamo
   def self.make_session
     puts __method__
     sw = Stopwatch.new("Create AWS session");
-    #keys = read_aws_keys
-    sts = AWS::STS.new()#access_key_id:keys[0],secret_access_key:keys[1])
+    keys = read_aws_keys
+    sts = AWS::STS.new(access_key_id:keys[0],secret_access_key:keys[1])
     @@session = sts.new_session(duration:60*15)#Seconds. Must be greater than 900 seconds.
     AWS.config({dynamo_db_endpoint:"dynamodb.ap-northeast-1.amazonaws.com"})
     sw.stop
