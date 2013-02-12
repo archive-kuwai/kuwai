@@ -11,8 +11,9 @@ class Dynamo
     
     p ENV['AWS_ACCESS_KEY']
     p ENV['AWS_ACCESS_KEY_ID']
-    keys = [ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY']]
+    #keys = [ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY']]
     #keys = [ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']]
+    keys = [ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_KEY']]
     
     if(keys[0]==nil) then
       puts "No AWS environment variables here. So I will read local secrets file."
