@@ -86,7 +86,6 @@ get '/api/*/*' do |verify_length_as_string, asking_json|
   else
     Dynamo.make_session
     Dynamo.connect
-    p result = "OTHER ERROR OCCUERED========================================"
   ensure
     return result
   end
