@@ -23,8 +23,8 @@ class Dynamo
   def self.make_session
     puts __method__
     sw = Stopwatch.new("Create AWS session");
-    keys = read_aws_keys
-    sts = AWS::STS.new(access_key_id:keys[0],secret_access_key:keys[1])
+    #keys = read_aws_keys
+    sts = AWS::STS.new()#access_key_id:keys[0],secret_access_key:keys[1])
     @@session = sts.new_session(duration:60*15)#Seconds. Must be greater than 900 seconds.
     AWS.config({dynamo_db_endpoint:"dynamodb.ap-northeast-1.amazonaws.com"})
     sw.stop
