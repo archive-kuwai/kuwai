@@ -1,5 +1,5 @@
 $stdout.sync = true
 
-sssssrequire './web'
+require './web'
 run Sinatra::Application
 
