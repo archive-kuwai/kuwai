@@ -1,6 +1,2 @@
-$stdout.sync = true
-
-return "Hey! Yay!"
-require './web'
+require './helloworld'
 run Sinatra::Application
-
