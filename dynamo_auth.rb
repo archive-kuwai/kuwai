@@ -23,7 +23,7 @@ def auth2(email,key)
   if(email==nil || email=='') then return false end
   if(key==nil || key=='') then return false end
   
-  sw = Stopwatch.new("auth2")
+  sw = Stopwatch.new(__method__)
   b = $kuwai_endusers2.items[email,key].exists?
   sw.stop
   return b

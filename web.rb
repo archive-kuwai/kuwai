@@ -63,9 +63,7 @@ get '/api/*/*' do |verify_length_as_string, asking_json|
   
   begin
     result = ""
-    sw = Stopwatch.new("auth2")
     if( ! auth2(who[0],who[1])) then return pad params[:callback],'["Wrong_email_or_password"]' end
-    sw.stop
     case mthd[0]
       when "list" then
         result = pad params[:callback],records(mthd[1],mthd[2])
@@ -83,9 +81,6 @@ get '/api/*/*' do |verify_length_as_string, asking_json|
     Dynamo.make_session
     Dynamo.connect
     p result = "STANDARD ERROR OCCUERED========================================"
-  else
-    Dynamo.make_session
-    Dynamo.connect
   ensure
     return result
   end
