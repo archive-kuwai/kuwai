@@ -1,5 +1,4 @@
 #coding:utf-8
-
 require 'sinatra'
 require './dynamo_connect.rb'
 require './dynamo_read.rb'
@@ -42,6 +41,7 @@ end
 
 # Why get, not post - 'cas wanna use jsonp
 get '/api/*/*' do |verify_length_as_string, asking_json|
+  puts "#{Time.now} #{__method__}"
   content_type:json
   verify_length = verify_length_as_string.to_i
   puts "verify_length is,#{verify_length}. asking_json.length is,#{asking_json.length}."
@@ -81,7 +81,5 @@ get '/api/*/*' do |verify_length_as_string, asking_json|
     Dynamo.make_session
     Dynamo.connect
     p result = "STANDARD ERROR OCCUERED========================================"
-  ensure
-    return result
   end
 end
