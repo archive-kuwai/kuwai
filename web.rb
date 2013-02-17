@@ -4,6 +4,7 @@ require './dynamo_connect.rb'
 require './dynamo_read.rb'
 require './dynamo_write.rb'
 require './dynamo_auth.rb'
+require './stopwatch.rb'
 
 get '/' do 
   p Time.now.utc
@@ -41,12 +42,13 @@ end
 
 # Why get, not post - 'cas wanna use jsonp
 get '/api/*/*' do |verify_length_as_string, asking_json|
-  puts "#{Time.now} #{__method__}"
+  sw = Stopwatch.new("#{Time.now} prepare");
+  #puts "#{Time.now} #{__method__}"
   content_type:json
   verify_length = verify_length_as_string.to_i
-  puts "verify_length is,#{verify_length}. asking_json.length is,#{asking_json.length}."
-  puts "asking_json is,"
-  puts asking_json
+  #puts "verify_length is,#{verify_length}. asking_json.length is,#{asking_json.length}."
+  #puts "asking_json is,"
+  #puts asking_json
   
   if(verify_length == 0) then
     # Do no verification.
@@ -56,14 +58,20 @@ get '/api/*/*' do |verify_length_as_string, asking_json|
     end
   end
   
+  sw.stop
+  sw = Stopwatch.new("prepare2");
   ask = JSON.parse(asking_json)
   who = ask["who"]
   mthd = ask["method"]
-  p who
+  #p who
   
   begin
     result = ""
-    if( ! auth2(who[0],who[1])) then return pad params[:callback],'["Wrong_email_or_password"]' end
+    sw.stop
+    sw = Stopwatch.new("who-validate");
+    if( ! auth(who[0],who[1])) then return pad params[:callback],'["Wrong_email_or_password"]' end
+    sw.stop
+    sw = Stopwatch.new("run method");
     case mthd[0]
       when "list" then
         result = pad params[:callback],records(mthd[1],mthd[2])
@@ -82,4 +90,6 @@ get '/api/*/*' do |verify_length_as_string, asking_json|
     Dynamo.connect
     p result = "STANDARD ERROR OCCUERED========================================"
   end
+  sw.stop
+  return result
 end
