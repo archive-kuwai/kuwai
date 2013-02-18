@@ -49,7 +49,7 @@ module Jsonp
 
   #--------------------------------------------
   def self.json_version4(dynamo_item) 
-    p dynamo_item
+    #p dynamo_item
     "{\"hash\":\"#{dynamo_item.hash_value}\",\"range\":\"#{dynamo_item.range_value}\"}"
   end
 
