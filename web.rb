@@ -14,9 +14,9 @@ get '/' do
 Hello! :)   I'm kuwai, made by Naohiro OHTA
 
 Try to send HTTP GET Method with below URLs.
-(this server)/api/0/{"method":["auth"],"who":["test@t.com","7b18ae007dab03abd77b397bf5058aa795a7352def052831629d2087c3bb8cba","browser1"]}
-(this server)/api/0/{"method":["auth"],"who":["test@t.com","7b18ae007dab03abd77b397bf5058aa795a7352def052831629d2087c3bb8cba","browser1"]}?callback=Yay
-(this server)/api/0/{"method":["list","Good Company","2013-01"],"who":["test@t.com","7b18ae007dab03abd77b397bf5058aa795a7352def052831629d2087c3bb8cba","browser1"]}
+/api/0/{"method":["auth"],"who":["test@t.com","7b18ae007dab03abd77b397bf5058aa795a7352def052831629d2087c3bb8cba","browser1"]}
+/api/0/{"method":["list","Good Company","2013-01"],"who":["test@t.com","7b18ae007dab03abd77b397bf5058aa795a7352def052831629d2087c3bb8cba","browser1"]}
+/api/0/{"method":["list","Good Company","2013-01"],"who":["test@t.com","7b18ae007dab03abd77b397bf5058aa795a7352def052831629d2087c3bb8cba","browser1"]}?callback=pad
 
 0 is length of jsop-string( "{" to "}" ) to verify on server.
 0 means "Do no verify".
@@ -25,7 +25,6 @@ kuwai is not REST.
 Although request is data changing one, kuwai use HTTP GET Method 'Cos wanna use jsonp.
 Mmm... but.. is this ok?...  with Chrome Prerendering...
 https://developers.google.com/chrome/whitepapers/prerender
-
 EOS
 end
 
