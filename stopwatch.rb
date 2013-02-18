@@ -6,10 +6,10 @@ class Stopwatch
   def initialize(s)
     @start = Time.now
     @end = nil
-    print "Doing #{[s]} ... "
+    print "#{[s]}"
   end
   def stop()
     @end = Time.now
-    puts "Finished in #{(@end-@start)*1000} ms."
+    print "#{(@end-@start)*1000}ms/"
   end
 end
