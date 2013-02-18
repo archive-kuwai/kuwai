@@ -79,6 +79,8 @@ get '/api/*/*' do |verify_length_as_string, asking_json|
         result = pad params[:callback],record(mthd[1],mthd[2])
       when "auth" then
         result = pad params[:callback],'["Authed"]'
+      when "submit" then
+        result = pad params[:callback],create_record(mthd[1],mthd[2],mthd[3])
       else
     end
   rescue AWS::STS::Errors
