@@ -80,6 +80,7 @@ p attr
   
   #-----------------------------
   def self.json_version1(dynamo_item)
+    require 'json'
     JSON.generate dynamo_item.attributes.to_h
   end
   
