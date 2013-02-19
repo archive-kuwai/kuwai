@@ -13,3 +13,14 @@ def record(tenant,range_value)
   item = $kuwai_records.items[tenant, range_value]
   Jsonp.jsonp_from_dynamo_item_attrs item
 end
+
+def templates(tenant)
+  items = $kuwai_templates.items.query(hash_value:tenant)
+  #Jsonp.jsonp_from_dynamo_items items
+  ary = []
+  items.each do |item|
+    ary.push(item.range_value)
+  end
+  ary.sort!
+  ary.to_json
+end
