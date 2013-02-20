@@ -2,7 +2,7 @@
 require 'aws/dynamo_db'
 require './range_key_for_records.rb'
 
-def create_record(tenant,title) # 2nd param is range_value, 3rd is KEYVALUE JSON
+def create_record(tenant,title,others) # 2nd param is range_value, 3rd is KEYVALUE JSON
   attrs = $kuwai_templates.items[tenant,title].attributes
   if(attrs.count==0) then 
     return "[#{title}] is invalid template title for #{tenant}."

@@ -79,7 +79,7 @@ get '/api/*/*' do |verify_length_as_string, asking_json|
         result = pad params[:callback],record(mthd[1],mthd[2])
       when "auth" then
         result = pad params[:callback],'["Authed"]'
-      when "create" then
+      when "new" then
         result = pad params[:callback],create_record(mthd[1],mthd[2],mthd[3])
       when "templates" then
         result = pad params[:callback],templates(mthd[1])
